@@ -2,8 +2,8 @@ import ws from 'k6/ws';
 import { check } from 'k6';
 
 export const options = {
-  vus: 500, // Number of virtual users
-  duration: '60s', // Test duration
+  vus: 2000, // Number of virtual users
+  duration: '120s', // Test duration
 };
 
 export default function () {
