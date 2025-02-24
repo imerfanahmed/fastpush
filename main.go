@@ -168,10 +168,10 @@ func main() {
 	
 	router.HandleFunc("/app/{key}", websocketHandler).Methods("GET")
 	router.Handle("/trigger", AuthenticateTrigger(http.HandlerFunc(triggerHandler))).Methods("POST")
-
-	serverPort := os.Getenv("SERVER_PORT")
+	serverHost := os.Getenv("HOST")
+	serverPort := os.Getenv("PORT")
 	log.Printf("Server starting on :%s", serverPort)
-	if err := http.ListenAndServe(fmt.Sprintf("127.0.0.1:%s", serverPort), router); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("%s:%s",serverHost, serverPort), router); err != nil {
 		log.Fatal("Server failed to start: ", err)
 	}
 }
