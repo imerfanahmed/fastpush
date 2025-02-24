@@ -64,7 +64,7 @@ func loadEnv() {
 }
 
 func loadAppConfigs(db *sql.DB) {
-	rows, err := db.Query("SELECT id, key, secret FROM apps")
+	rows, err := db.Query("SELECT id, `key`, secret FROM apps")
 	if err != nil {
 		log.Fatal("Error querying apps: ", err)
 	}
