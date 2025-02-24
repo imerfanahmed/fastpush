@@ -5,7 +5,6 @@ import (
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -17,6 +16,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
 	_ "github.com/go-sql-driver/mysql"
+	"bytes"
 )
 
 // AppConfig represents an application configuration from the database
@@ -167,7 +167,7 @@ func main() {
 	router := mux.NewRouter()
 	
 	router.HandleFunc("/app/{key}", websocketHandler).Methods("GET")
-	router.Handle("/trigger", AuthenticateTrigger(http.HandlerFunc(triggerHandler))).Methods("POST")
+	router.Handle("/trigger", AuthenticateTrigger(http.HandlerFunc(websocketHandler))).Methods("POST")
 	serverHost := os.Getenv("HOST")
 	serverPort := os.Getenv("PORT")
 	log.Printf("Server starting on :%s", serverPort)
