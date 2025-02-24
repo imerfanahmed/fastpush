@@ -170,7 +170,7 @@ func main() {
 	router.Handle("/trigger", AuthenticateTrigger(http.HandlerFunc(websocketHandler))).Methods("POST")
 	serverHost := os.Getenv("HOST")
 	serverPort := os.Getenv("PORT")
-	log.Printf("Server starting on :%s", serverPort)
+	log.Printf("Server starting on %s:%s",serverHost, serverPort)
 	if err := http.ListenAndServe(fmt.Sprintf("%s:%s",serverHost, serverPort), router); err != nil {
 		log.Fatal("Server failed to start: ", err)
 	}
